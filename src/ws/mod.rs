@@ -44,6 +44,7 @@ async fn handle(
     ws_stream: &mut SplitStream<WebSocket>,
 ) -> Result<(), WSCloseType> {
     // Authentication
+
     let (room, user_id) = loop {
         match ws_stream.next().await {
             Some(message) => {

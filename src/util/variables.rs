@@ -3,7 +3,7 @@ use std::env;
 use std::net::{IpAddr, SocketAddr};
 use std::str::FromStr;
 
-use mediasoup::data_structures::TransportListenIp;
+use mediasoup::data_structures::ListenIp;
 use mediasoup::prelude::TransportListenIps;
 
 lazy_static! {
@@ -37,7 +37,7 @@ lazy_static! {
                     }
                 }
 
-                ip_vec.push(TransportListenIp {
+                ip_vec.push(ListenIp {
                     ip, announced_ip,
                 });
             }
