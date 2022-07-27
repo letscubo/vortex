@@ -29,6 +29,23 @@ pub fn create_opus_codec(channels: u8) -> RtpCodecCapability {
     }
 }
 
+pub fn create_vp9_codec() -> RtpCodecCapability {
+    RtpCodecCapability::Video {
+        mime_type: MimeTypeVideo::Vp9,
+        preferred_payload_type: None,
+        clock_rate: NonZeroU32::new(90000).unwrap(),
+        parameters: RtpCodecParametersParameters::default(),
+        rtcp_feedback: vec![
+            RtcpFeedback::Nack,
+            RtcpFeedback::NackPli,
+            RtcpFeedback::CcmFir,
+            RtcpFeedback::GoogRemb,
+            RtcpFeedback::TransportCc,
+        ],
+
+    }
+
+
 pub struct RtcState {
     rtp_capabilities: RtpCapabilities,
     transport_mode: TransportMode,

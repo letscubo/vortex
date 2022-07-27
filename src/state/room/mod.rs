@@ -52,6 +52,7 @@ impl Room {
 
         let mut options = RouterOptions::default();
         options.media_codecs.push(crate::rtc::create_opus_codec(2));
+        options.media_codecs.push(crate::rtc::create_vp9_codec());
         let router = worker
             .create_router(options)
             .await
