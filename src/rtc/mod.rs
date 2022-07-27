@@ -44,7 +44,7 @@ pub fn create_vp9_codec() -> RtpCodecCapability {
         ],
 
     }
-
+}
 
 pub struct RtcState {
     rtp_capabilities: RtpCapabilities,
