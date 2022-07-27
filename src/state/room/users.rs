@@ -67,7 +67,7 @@ impl<'r> RoomUsers {
         let mut registrations = self.room.registrations.write().await;
         let registration = registrations.remove(token)?;
         drop(registrations);
-        println!(&registration);
+
 
         let users = self.room.users.read().await;
         let user = users.get(&registration)?;
