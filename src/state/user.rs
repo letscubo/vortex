@@ -50,7 +50,7 @@ pub struct User {
     id: String,
     token: Option<String>,
     room: Arc<Room>,
-
+    video: Option<Producer>,
     audio: Option<Producer>,
 }
 
@@ -60,7 +60,7 @@ impl User {
             id: id,
             token: Some(token.clone()),
             room: room,
-
+            video: None,
             audio: None,
         }
     }
@@ -105,6 +105,7 @@ impl User {
         }
         let producer = match produce_type {
             ProduceType::Audio => &mut self.audio,
+            ProduceType::Video => &mut self.video,
             _ => todo!(),
         };
 
