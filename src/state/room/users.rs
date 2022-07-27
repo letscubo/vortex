@@ -68,6 +68,7 @@ impl<'r> RoomUsers {
         println!(registrations);
         let registration = registrations.remove(token)?;
         drop(registrations);
+        println!(registration);
 
         let users = self.room.users.read().await;
         let user = users.get(&registration)?;
