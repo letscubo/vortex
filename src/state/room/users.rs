@@ -65,7 +65,7 @@ impl<'r> RoomUsers {
 
     pub async fn register(&'r self, token: &str) -> Option<UserGuard<'r>> {
         let mut registrations = self.room.registrations.write().await;
-        let registration = registrations.remove(token)?;
+        let registration = registrations.get(token)?;
         drop(registrations);
 
         let users = self.room.users.read().await;
