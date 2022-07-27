@@ -89,6 +89,7 @@ impl User {
     pub fn get_producer(&self, produce_type: ProduceType) -> Option<&Producer> {
         let producer = match produce_type {
             ProduceType::Audio => &self.audio,
+            ProduceType::Video => &self.video,
             _ => todo!(),
         };
 
@@ -122,12 +123,14 @@ impl User {
 #[derive(Serialize)]
 pub struct UserInfo {
     audio: bool,
+    video: bool,
 }
 
 impl From<&User> for UserInfo {
     fn from(user: &User) -> UserInfo {
         UserInfo {
             audio: user.audio.is_some(),
+            video: user.video.is_some(),
         }
     }
 }
