@@ -67,8 +67,6 @@ impl<'r> RoomUsers {
         let registrations = self.room.registrations.read().await;
         let registration = registrations.get(token)?;
         // drop(registrations);
-
-
         let users = self.room.users.read().await;
         let user = users.get(registration)?;
         let id = {
@@ -76,7 +74,7 @@ impl<'r> RoomUsers {
             user.register().await;
             user.id().to_string()
         };
-
+        println!("userId: {}", id);
         Some(UserGuard { inner: users, id })
     }
 
