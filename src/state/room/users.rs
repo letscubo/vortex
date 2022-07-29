@@ -72,8 +72,8 @@ impl<'r> RoomUsers {
         let user = users.get(registration)?;
         let id = {
             let mut user = user.read().await;
-            let &id = user.register().await;
-            id.to_string()
+            user.register().await;
+            user.id().to_string()
         };
         println!("userId: {}", id);
         Some(UserGuard { inner: users, id })
