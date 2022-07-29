@@ -36,7 +36,7 @@ pub fn route() -> BoxedFilter<(impl Reply,)> {
         .and(warp::get())
         .map(|_room: Arc<Room>| {
             warp::reply::json(&RoomReply {
-                video_allowed: false,
+                video_allowed: true,
                 users: Vec::new(),
             })
         });
