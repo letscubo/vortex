@@ -71,9 +71,8 @@ impl<'r> RoomUsers {
         let users = self.room.users.read().await;
         let user = users.get(registration)?;
         let id = {
-            let mut user = user.write().await;
+            let mut user = user.read().await;
             let &id = user.register().await;
-            drop(user);
             id.to_string()
         };
         println!("userId: {}", id);
