@@ -78,12 +78,14 @@ impl User {
     }
 
     pub async fn register(&mut self) {
-        if let Some(token) = self.token.take() {
-            // let mut registrations = self.room.registrations.write().await;
-            // registrations.remove(&token);
-            debug!("User {} registered", &self.id);
-            self.room.send_event(RoomEvent::UserJoined(self.id.clone()));
-        }
+        // if let Some(token) = self.token.take() {
+        //     // let mut registrations = self.room.registrations.write().await;
+        //     // registrations.remove(&token);
+        //     debug!("User {} registered", &self.id);
+        //     self.room.send_event(RoomEvent::UserJoined(self.id.clone()));
+        // }
+        self.room.send_event(RoomEvent::UserJoined(self.id.clone()));
+
     }
 
     pub fn get_producer(&self, produce_type: ProduceType) -> Option<&Producer> {

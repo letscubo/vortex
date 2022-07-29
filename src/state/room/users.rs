@@ -64,6 +64,7 @@ impl<'r> RoomUsers {
     }
 
     pub async fn register(&'r self, token: &str) -> Option<UserGuard<'r>> {
+        println!("token: {}", token);
         let registrations = self.room.registrations.read().await;
         let registration = registrations.get(token)?;
         // drop(registrations);
