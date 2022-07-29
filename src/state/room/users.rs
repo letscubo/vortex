@@ -72,7 +72,7 @@ impl<'r> RoomUsers {
         let user = users.get(registration)?;
         let id = {
             let mut user = user.write().await;
-            let id = user.register().await;
+            let &id = user.register().await;
             drop(user);
             id.to_string()
         };
