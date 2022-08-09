@@ -19,10 +19,10 @@ pub fn room_filter() -> impl Filter<Extract = (Arc<Room>,), Error = Rejection> +
     warp::path::param::<String>().and_then(|id: String| async move {
         match Room::get(&id).await {
             Some(room) => Ok(room),
-            None => {
-                let room = Room::new(id).await?;
-                Ok(room)
-            },
+            // None => {
+            //     let room = Room::new(id).await?;
+            //     Ok(room)
+            // },
             None => Err(warp::reject::custom(ApiError::RoomNotFound(id))),
         }
     })
