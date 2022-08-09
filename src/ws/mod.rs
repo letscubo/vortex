@@ -218,8 +218,10 @@ async fn event_loop(
                                 let users = room.users();
                                 println!("StartConsume: {}", producing_id);
                                 match users.get(&producing_id).await {
+                                    println!("producing_user.producing_user:{}", producing_user);
                                     Some(producing_user) => {
                                         let producing_user = producing_user.read().await;
+                                        println!("producing_user.producing_user.id:{}", producing_user.id());
                                         match producing_user.get_producer(*produce_type) {
                                             Some(producer) => {
                                                 let router = room.router().ok_or_else(|| WSCloseType::ServerError)?;
