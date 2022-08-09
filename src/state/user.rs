@@ -40,7 +40,8 @@ impl FromStr for ProduceType {
     type Err = ();
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            s if s == "audio" => Ok(Self::Audio),
+            "audio" => {Ok(Self::Audio)} ,
+            "video" => {Ok(Self::Video)} ,
             _ => Err(()),
         }
     }
