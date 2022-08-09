@@ -216,7 +216,7 @@ async fn event_loop(
                             WSCommandType::StartConsume { produce_type, user_id: producing_id } => {
                                 let producing_id = producing_id.clone();
                                 let users = room.users();
-                                println!("StartConsume: {}", producing_id)
+                                println!("StartConsume: {}", producing_id);
                                 match users.get(&producing_id).await {
                                     Some(producing_user) => {
                                         let producing_user = producing_user.read().await;
