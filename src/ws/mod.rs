@@ -44,7 +44,6 @@ async fn handle(
     ws_stream: &mut SplitStream<WebSocket>,
 ) -> Result<(), WSCloseType> {
     // Authentication
-
     let (room, user_id) = loop {
         match ws_stream.next().await {
             Some(message) => {
@@ -216,12 +215,9 @@ async fn event_loop(
                             WSCommandType::StartConsume { produce_type, user_id: producing_id } => {
                                 let producing_id = producing_id.clone();
                                 let users = room.users();
-                                println!("StartConsume: {}", producing_id);
                                 match users.get(&producing_id).await {
-                                    println!("producing_user.producing_user:{}", producing_user);
                                     Some(producing_user) => {
                                         let producing_user = producing_user.read().await;
-                                        println!("producing_user.producing_user.id:{}", producing_user.id());
                                         match producing_user.get_producer(*produce_type) {
                                             Some(producer) => {
                                                 let router = room.router().ok_or_else(|| WSCloseType::ServerError)?;

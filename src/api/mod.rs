@@ -16,9 +16,9 @@ fn authorize() -> impl Filter<Extract = ((),), Error = Rejection> + Copy {
                 if authorization == *variables::MANAGE_TOKEN {
                     return Ok(());
                 }
+
                 Err(warp::reject::custom(ApiError::Unauthorized))
             }
-
             None => Err(warp::reject::custom(ApiError::Unauthorized)),
         }
     })

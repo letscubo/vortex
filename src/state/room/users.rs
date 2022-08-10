@@ -64,18 +64,18 @@ impl<'r> RoomUsers {
     }
 
     pub async fn register(&'r self, token: &str) -> Option<UserGuard<'r>> {
-        println!("token: {}", token);
-        let registrations = self.room.registrations.read().await;
-        let registration = registrations.get(token)?;
-        // drop(registrations);
+        let mut registrations = self.room.registrations.write().await;
+        let registration = registrations.remove(token)?;
+        drop(registrations);
+
         let users = self.room.users.read().await;
-        let user = users.get(registration)?;
+        let user = users.get(&registration)?;
         let id = {
             let mut user = user.write().await;
             user.register().await;
             user.id().to_string()
         };
-        println!("userId: {}", id);
+
         Some(UserGuard { inner: users, id })
     }
 

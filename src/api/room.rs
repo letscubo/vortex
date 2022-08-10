@@ -19,10 +19,6 @@ pub fn room_filter() -> impl Filter<Extract = (Arc<Room>,), Error = Rejection> +
     warp::path::param::<String>().and_then(|id: String| async move {
         match Room::get(&id).await {
             Some(room) => Ok(room),
-            // None => {
-            //     let room = Room::new(id).await?;
-            //     Ok(room)
-            // },
             None => Err(warp::reject::custom(ApiError::RoomNotFound(id))),
         }
     })
@@ -40,7 +36,7 @@ pub fn route() -> BoxedFilter<(impl Reply,)> {
         .and(warp::get())
         .map(|_room: Arc<Room>| {
             warp::reply::json(&RoomReply {
-                video_allowed: true,
+                video_allowed: false,
                 users: Vec::new(),
             })
         });

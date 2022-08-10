@@ -28,7 +28,6 @@ pub fn create_opus_codec(channels: u8) -> RtpCodecCapability {
         rtcp_feedback: Vec::new(),
     }
 }
-
 pub fn create_vp9_codec() -> RtpCodecCapability {
     RtpCodecCapability::Video {
         mime_type: MimeTypeVideo::Vp9,
