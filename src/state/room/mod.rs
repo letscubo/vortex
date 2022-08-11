@@ -58,7 +58,7 @@ impl Room {
         options.media_codecs.push(crate::rtc::create_vp9_codec());
         let router = worker
             // .create_router(RouterOptions::new(get_supported_rtp_capabilities().codecs))
-            .create_router(RouterOptions::new(options.codecs))
+            .create_router(RouterOptions::new(options.media_codecs))
             .await
             .map_err(|_| ApiError::InternalServerError)?;
 
