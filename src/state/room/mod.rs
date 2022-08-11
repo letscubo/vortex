@@ -7,9 +7,6 @@ use std::sync::{
 use mediasoup::router::{Router, RouterOptions};
 use mediasoup::{
     supported_rtp_capabilities::get_supported_rtp_capabilities,
-    webrtc_transport::{TransportListenIps, WebRtcTransportOptions},
-    worker::WorkerSettings,
-    worker_manager::WorkerManager,
 };
 use tokio::sync::{
     broadcast::{self, Receiver, Sender},
