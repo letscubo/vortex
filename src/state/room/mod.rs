@@ -5,6 +5,13 @@ use std::sync::{
 };
 
 use mediasoup::router::{Router, RouterOptions};
+use mediasoup::{
+    data_structures::TransportListenIp,
+    supported_rtp_capabilities::get_supported_rtp_capabilities,
+    webrtc_transport::{TransportListenIps, WebRtcTransportOptions},
+    worker::WorkerSettings,
+    worker_manager::WorkerManager,
+};
 use tokio::sync::{
     broadcast::{self, Receiver, Sender},
     RwLock,
@@ -50,11 +57,11 @@ impl Room {
 
         let worker = get_worker_pool().get_worker();
 
-        let mut options = RouterOptions::default();
-        options.media_codecs.push(crate::rtc::create_opus_codec(2));
-        options.media_codecs.push(crate::rtc::create_vp9_codec());
+        // let mut options = RouterOptions::default();
+        // options.media_codecs.push(crate::rtc::create_opus_codec(2));
+        // options.media_codecs.push(crate::rtc::create_vp9_codec());
         let router = worker
-            .create_router(options)
+            .create_router(RouterOptions::new(get_supported_rtp_capabilities().codecs))
             .await
             .map_err(|_| ApiError::InternalServerError)?;
 
