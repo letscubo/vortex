@@ -66,7 +66,7 @@ impl Room {
             .map_err(|_| ApiError::InternalServerError)?;
 
         let (sender, _) = broadcast::channel(32);
-        info!("Created new room {}", id);
+        println!("Created new room {}", id);
         let room = Arc::new(Room {
             id: id.clone(),
             closed: AtomicBool::new(false),
