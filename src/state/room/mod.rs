@@ -5,9 +5,9 @@ use std::sync::{
 };
 
 use mediasoup::router::{Router, RouterOptions};
-use mediasoup::{
-    supported_rtp_capabilities::get_supported_rtp_capabilities,
-};
+// use mediasoup::{
+//     supported_rtp_capabilities::get_supported_rtp_capabilities,
+// };
 use tokio::sync::{
     broadcast::{self, Receiver, Sender},
     RwLock,
@@ -52,16 +52,16 @@ impl Room {
         }
 
         let worker = get_worker_pool().get_worker();
-        // let mut options = RouterOptions::default();
-        // options.media_codecs.push(crate::rtc::create_opus_codec(2));
-        // options.media_codecs.push(crate::rtc::create_vp9_codec());
+        let mut options = RouterOptions::default();
+        options.media_codecs.push(crate::rtc::create_opus_codec(2));
+        options.media_codecs.push(crate::rtc::create_vp9_codec());
 
         // let s = get_supported_rtp_capabilities().codecs;
         // options.media_codecs.extend_from_slice(&s);
         let router = worker
             // .create_router(RouterOptions::new(get_supported_rtp_capabilities().codecs))
-            // .create_router(RouterOptions::new(options.media_codecs))
-            .create_route(RouterOptions::new(crate::rtc::media_codecs()))
+            .create_router(RouterOptions::new(options.media_codecs))
+            // .create_route(RouterOptions::new(crate::rtc::media_codecs()))
             .await
             .map_err(|_| ApiError::InternalServerError)?;
 
