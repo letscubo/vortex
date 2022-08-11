@@ -6,7 +6,6 @@ use std::sync::{
 
 use mediasoup::router::{Router, RouterOptions};
 use mediasoup::{
-    data_structures::TransportListenIp,
     supported_rtp_capabilities::get_supported_rtp_capabilities,
     webrtc_transport::{TransportListenIps, WebRtcTransportOptions},
     worker::WorkerSettings,
